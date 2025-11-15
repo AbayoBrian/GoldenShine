@@ -312,14 +312,6 @@
             font-weight: bold;
         }
 
-        .service-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-top: 1rem;
-        }
-
         /* Features Section */
         .features-section {
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -789,6 +781,82 @@
             color: white;
         }
 
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+        }
+
+        .pricing-section h2 {
+            color: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid var(--secondary);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--secondary);
+        }
+
+        .price-period {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
         /* Service Images Section */
         .service-images {
             display: grid;
@@ -864,7 +932,7 @@
                 font-size: 2.2rem;
             }
 
-            .services-grid, .gallery-grid, .features-grid, .tools-grid, .areas-grid, .service-images {
+            .services-grid, .gallery-grid, .features-grid, .tools-grid, .areas-grid, .pricing-grid, .service-images {
                 grid-template-columns: 1fr;
             }
 
@@ -884,6 +952,14 @@
 
             .social-links {
                 justify-content: center;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-5px);
             }
         }
 
@@ -914,6 +990,7 @@
                 <a href="#services">Services</a>
                 <a href="#features">Features</a>
                 <a href="#tools">Tools</a>
+                <a href="#pricing">Pricing</a>
                 <a href="#areas">Service Areas</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#about">About</a>
@@ -1151,9 +1228,54 @@
             </div>
         </section>
 
+        <section id="pricing" class="pricing-section">
+            <h2>Our Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic Cleaning</h3>
+                    <div class="price">KSh 2,500<span class="price-period">/session</span></div>
+                    <ul class="pricing-features">
+                        <li>General surface cleaning</li>
+                        <li>Dusting and vacuuming</li>
+                        <li>Bathroom cleaning</li>
+                        <li>Kitchen surface cleaning</li>
+                        <li>Up to 3 hours</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Book Now</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Standard Cleaning</h3>
+                    <div class="price">KSh 4,500<span class="price-period">/session</span></div>
+                    <ul class="pricing-features">
+                        <li>All Basic Cleaning features</li>
+                        <li>Deep kitchen cleaning</li>
+                        <li>Deep bathroom cleaning</li>
+                        <li>Window cleaning (interior)</li>
+                        <li>Up to 5 hours</li>
+                        <li>Eco-friendly products</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Book Now</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Premium Cleaning</h3>
+                    <div class="price">KSh 7,500<span class="price-period">/session</span></div>
+                    <ul class="pricing-features">
+                        <li>All Standard Cleaning features</li>
+                        <li>Carpet cleaning</li>
+                        <li>Upholstery cleaning</li>
+                        <li>Window cleaning (interior & exterior)</li>
+                        <li>Up to 8 hours</li>
+                        <li>Eco-friendly products</li>
+                        <li>Priority scheduling</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Book Now</a>
+                </div>
+            </div>
+        </section>
+
         <section id="areas" class="service-areas">
-            <h2>Service Areas</h2>
-            <p>We proudly serve the following areas in Nairobi and its surroundings:</p>
+            <h2>Service Areas - We Cover All of Nairobi</h2>
+            <p>We proudly serve all areas across Nairobi and its surroundings:</p>
             <div class="areas-grid">
                 <div class="area-card">
                     <h3>Westlands</h3>
@@ -1179,8 +1301,32 @@
                 <div class="area-card">
                     <h3>CBD</h3>
                 </div>
+                <div class="area-card">
+                    <h3>Parklands</h3>
+                </div>
+                <div class="area-card">
+                    <h3>South B/C</h3>
+                </div>
+                <div class="area-card">
+                    <h3>Embakasi</h3>
+                </div>
+                <div class="area-card">
+                    <h3>Eastleigh</h3>
+                </div>
+                <div class="area-card">
+                    <h3>Donholm</h3>
+                </div>
+                <div class="area-card">
+                    <h3>Buruburu</h3>
+                </div>
+                <div class="area-card">
+                    <h3>Kasarani</h3>
+                </div>
+                <div class="area-card">
+                    <h3>Roysambu</h3>
+                </div>
             </div>
-            <p style="text-align: center; margin-top: 2rem;">Don't see your area listed? <a href="#contact" style="color: var(--primary);">Contact us</a> to check if we serve your location!</p>
+            <p style="text-align: center; margin-top: 2rem;">We service all areas across Nairobi County. Contact us for service in your specific location!</p>
         </section>
 
         <section id="gallery">
@@ -1270,11 +1416,11 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" class="form-control">
+                        <input type="tel" id="phone" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="service">Service Interested In</label>
-                        <select id="service" class="form-control">
+                        <select id="service" class="form-control" required>
                             <option value="">Select a service</option>
                             <option value="general">General Cleaning</option>
                             <option value="specialized">Specialized Cleaning</option>
@@ -1286,7 +1432,7 @@
                     </div>
                     <div class="form-group">
                         <label for="property">Property Type</label>
-                        <select id="property" class="form-control">
+                        <select id="property" class="form-control" required>
                             <option value="">Select property type</option>
                             <option value="residential">Residential</option>
                             <option value="commercial">Commercial</option>
@@ -1325,6 +1471,7 @@
                 <p><a href="#services" style="color: white; text-decoration: none;">Services</a></p>
                 <p><a href="#features" style="color: white; text-decoration: none;">Features</a></p>
                 <p><a href="#tools" style="color: white; text-decoration: none;">Our Tools</a></p>
+                <p><a href="#pricing" style="color: white; text-decoration: none;">Pricing</a></p>
                 <p><a href="#areas" style="color: white; text-decoration: none;">Service Areas</a></p>
                 <p><a href="#gallery" style="color: white; text-decoration: none;">Gallery</a></p>
                 <p><a href="#about" style="color: white; text-decoration: none;">About Us</a></p>
@@ -1353,7 +1500,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Golden Shine Limited. All rights reserved.</p>
+            <p>&copy; 2024 Golden Shine Limited. All rights reserved.</p>
             <p>Designed and Implemented by <a href="mailto:owinb239@gmail.com" style="color: var(--secondary); text-decoration: none;">owinb239@gmail.com</a></p>
         </div>
     </footer>
