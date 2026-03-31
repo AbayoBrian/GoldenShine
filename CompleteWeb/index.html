@@ -2,110 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoldenShine Limited - Professional Cleaning Services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>GoldenShine Limited | Premium Cleaning Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== GOLDENSHINE COLOR SCHEME ===== */
-        :root {
-            --primary-black: #000000;
-            --primary-gold: #D4AF37;
-            --accent-white: #FFFFFF;
-            --accent-yellow: #FFD700;
-            --accent-blue: #1E90FF;
-            --accent-green: #32CD32;
-            --accent-red: #FF4500;
-            
-            /* Supporting variables for gradients and shadows */
-            --shadow: 0 4px 15px rgba(0,0,0,0.3);
-            --transition: all 0.3s ease;
-        }
-
-        /* Dark mode overrides - keeping the GoldenShine identity */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --accent-white: #1a1a1a;
-            }
-        }
-
-        .dark-mode {
-            --accent-white: #1a1a1a;
-        }
-
+        /* ----- RESET & GLOBAL ----- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F5E18B;
+            --gold-dark: #B4942E;
+            --black: #0A0A0A;
+            --black-rich: #000000;
+            --white: #FFFFFF;
+            --gray-light: #F8F9FA;
+            --gray-mid: #E9ECEF;
+            --shadow-sm: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.02);
+            --shadow-md: 0 20px 25px -12px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
-            line-height: 1.6;
-            background-color: var(--primary-black);
-            color: var(--accent-white);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.5;
+            scroll-behavior: smooth;
             overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Accessibility & Utility */
+        /* smooth loading & modern fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap');
+
+        /* skip link */
         .skip-link {
             position: absolute;
             top: -40px;
-            left: 6px;
-            background: var(--primary-gold);
-            color: var(--primary-black);
-            padding: 8px;
-            z-index: 10000;
+            left: 20px;
+            background: var(--gold);
+            color: var(--black);
+            padding: 8px 16px;
+            border-radius: 40px;
             text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
+            font-weight: 600;
+            z-index: 10000;
+            transition: top 0.2s;
         }
+        .skip-link:focus { top: 20px; }
 
-        .skip-link:focus {
-            top: 6px;
-        }
-
+        /* toast */
         .toast-container {
             position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 10000;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1100;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
-
         .toast {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            animation: slideInRight 0.3s ease;
-            max-width: 300px;
-            font-weight: bold;
+            background: var(--gold);
+            color: var(--black);
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(8px);
+            animation: slideUp 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .toast.error { background: #E53E3E; color: white; }
+        .toast.success { background: #10B981; color: white; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
         }
 
-        .toast.error {
-            background: var(--accent-red);
-            color: white;
-        }
-
-        .toast.success {
-            background: var(--accent-green);
-            color: var(--primary-black);
-        }
-
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
+        /* loading state */
         .loading {
             position: relative;
             pointer-events: none;
+            opacity: 0.8;
         }
-
         .loading::after {
             content: '';
             position: absolute;
@@ -113,548 +96,538 @@
             left: 50%;
             width: 20px;
             height: 20px;
-            margin: -10px 0 0 -10px;
-            border: 2px solid transparent;
-            border-top: 2px solid var(--primary-gold);
+            border: 2px solid rgba(0,0,0,0.2);
+            border-top: 2px solid var(--gold);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 0.8s linear infinite;
+            transform: translate(-50%, -50%);
         }
+        @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        *:focus-visible {
-            outline: 2px solid var(--primary-gold);
-            outline-offset: 2px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Header Styles - Gold & Black theme */
+        /* header fixed modern */
         header {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-            padding: 1rem;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: var(--shadow);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             transition: var(--transition);
         }
-
         .header-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0.9rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1.5rem;
         }
-
         .logo {
-            height: 60px;
-            transition: var(--transition);
-            filter: brightness(0);
+            height: 48px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.2s;
         }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
+        .logo:hover { transform: scale(1.02); }
         nav {
             display: flex;
-            gap: 1.5rem;
+            gap: 0.5rem;
             align-items: center;
+            flex-wrap: wrap;
         }
-
         nav a {
-            color: var(--primary-black);
+            color: var(--white);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             padding: 0.5rem 1rem;
-            border-radius: 25px;
+            border-radius: 40px;
             transition: var(--transition);
-            position: relative;
+            font-size: 0.95rem;
         }
-
         nav a:hover {
-            color: var(--accent-white);
-            background: rgba(0,0,0,0.1);
-            transform: translateY(-2px);
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
         }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--accent-white);
-            transition: var(--transition);
-            transform: translateX(-50%);
-        }
-
-        nav a:hover::after {
-            width: 80%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--primary-black);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
         .theme-toggle {
-            background: none;
+            background: rgba(255,255,255,0.08);
             border: none;
-            color: var(--primary-black);
+            color: var(--gold);
             font-size: 1.2rem;
             cursor: pointer;
             padding: 0.5rem;
             border-radius: 50%;
+            width: 40px;
             transition: var(--transition);
         }
-
-        .theme-toggle:hover {
-            background: rgba(0, 0, 0, 0.1);
+        .theme-toggle:hover { background: var(--gold); color: var(--black); }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-size: 1.8rem;
+            cursor: pointer;
         }
 
-        /* Hero Section - Black background with gold accents */
+        /* hero section – shine */
         .hero {
-            margin-top: 80px;
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('images/hero.jpeg');
+            margin-top: 72px;
+            padding: 5rem 2rem 6rem;
+            background: radial-gradient(circle at 10% 30%, rgba(0,0,0,0.95), var(--black)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            color: var(--accent-white);
+            background-blend-mode: overlay;
             text-align: center;
+            border-bottom: 3px solid var(--gold);
             position: relative;
-            border-bottom: 4px solid var(--primary-gold);
         }
-
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            font-size: 3.3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #FFF 30%, var(--gold) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
         }
-
         .hero p {
             font-size: 1.2rem;
-            max-width: 700px;
+            max-width: 680px;
             margin: 0 auto 2rem;
+            opacity: 0.9;
         }
-
         .cta-button {
             display: inline-block;
-            background: var(--primary-gold);
-            color: var(--primary-black);
+            background: var(--gold);
+            color: var(--black);
             padding: 0.8rem 2rem;
             border-radius: 50px;
+            font-weight: 700;
             text-decoration: none;
-            font-weight: bold;
             transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             margin: 0.5rem;
-            cursor: pointer;
             border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(212,175,55,0.3);
         }
-
         .cta-button:hover {
-            transform: translateY(-5px);
-            background: var(--accent-yellow);
-            color: var(--primary-black);
+            transform: translateY(-3px);
+            background: var(--gold-light);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.4);
         }
-
         .cta-button.secondary {
             background: transparent;
-            color: var(--accent-white);
-            border: 2px solid var(--primary-gold);
+            border: 2px solid var(--gold);
+            color: var(--white);
         }
-
-        .cta-button.secondary:hover {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-        }
-
+        .cta-button.secondary:hover { background: var(--gold); color: var(--black); }
         .share-btn {
-            background: rgba(255, 255, 255, 0.15);
-            color: var(--accent-white);
-            border: 1px solid var(--primary-gold);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--gold);
+            padding: 0.7rem 1.4rem;
+            border-radius: 50px;
             cursor: pointer;
             transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-left: 1rem;
+            color: white;
         }
+        .share-btn:hover { background: var(--gold); color: black; }
 
-        .share-btn:hover {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-        }
-
-        /* Mission Vision - Glassmorphism with gold */
+        /* mission vision cards */
         .mission-vision-container {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 4rem;
             flex-wrap: wrap;
         }
-
         .mission-box, .vision-box {
-            background: rgba(212, 175, 55, 0.15);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
             padding: 2rem;
-            border-radius: 15px;
+            border-radius: 32px;
             flex: 1;
-            min-width: 280px;
-            max-width: 400px;
-            border: 1px solid var(--primary-gold);
+            min-width: 260px;
+            max-width: 420px;
+            border: 1px solid rgba(212,175,55,0.4);
             transition: var(--transition);
         }
-
         .mission-box:hover, .vision-box:hover {
-            transform: translateY(-5px);
-            background: rgba(212, 175, 55, 0.25);
-            border-color: var(--accent-yellow);
+            border-color: var(--gold);
+            transform: translateY(-6px);
+            background: rgba(0,0,0,0.75);
         }
-
         .box-title {
-            font-size: 1.5rem;
-            color: var(--primary-gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 1.7rem;
+            color: var(--gold);
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary-gold);
-            display: inline-block;
+            letter-spacing: -0.3px;
         }
 
-        /* Main Content */
+        /* main container */
         main {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
         }
-
         section {
-            margin-bottom: 4rem;
-            background: var(--accent-white);
-            color: var(--primary-black);
+            margin-bottom: 5rem;
+            background: var(--white);
+            color: var(--black);
             padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
+            border-radius: 32px;
+            box-shadow: var(--shadow-sm);
             transition: var(--transition);
-            border-top: 3px solid var(--primary-gold);
+            border-top: 4px solid var(--gold);
         }
-
-        section:hover {
-            transform: translateY(-3px);
+        .features-section, .pricing-section, .testimonials {
+            background: linear-gradient(145deg, #0c0c0c, #050505);
+            color: var(--white);
         }
-
-        h1, h2, h3 {
-            color: var(--primary-black);
-            margin-bottom: 1.5rem;
-            text-align: center;
+        .features-section h2, .pricing-section h2, .testimonials h2 {
+            color: var(--white);
         }
-
         h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
             position: relative;
             display: inline-block;
             width: auto;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            letter-spacing: -0.3px;
         }
         h2:after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
+            bottom: -12px;
+            left: 20%;
+            width: 60%;
             height: 3px;
-            background: var(--primary-gold);
+            background: var(--gold);
+            border-radius: 3px;
         }
-
+        .services-grid, .features-grid, .pricing-grid, .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .service-card, .feature-card, .pricing-card, .area-card {
+            background: var(--white);
+            padding: 1.8rem;
+            border-radius: 28px;
+            transition: var(--transition);
+            border: 1px solid rgba(212,175,55,0.2);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+        }
+        .service-card:hover, .feature-card:hover, .pricing-card:hover, .area-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 30px -12px rgba(212,175,55,0.25);
+        }
+        .service-card h3 i, .feature-icon i {
+            color: var(--gold);
+            margin-right: 8px;
+        }
+        .service-card ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        .service-card li {
+            margin: 0.6rem 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-card li::before {
+            content: "✓";
+            color: var(--gold);
+            font-weight: bold;
+        }
+        .feature-card {
+            text-align: center;
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .pricing-card {
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .pricing-card.featured {
+            border: 2px solid var(--gold);
+            background: rgba(212,175,55,0.1);
+            transform: scale(1.02);
+        }
+        .price {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin: 1rem 0;
+        }
+        .pricing-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .pricing-features li {
+            margin: 0.5rem 0;
+        }
+        .area-card {
+            text-align: center;
+            background: rgba(212,175,55,0.05);
+        }
+        /* gallery slider polished */
+        .gallery-container {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+        .gallery-slide img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+            padding: 0 1rem;
+        }
+        .slider-btn {
+            background: rgba(0,0,0,0.6);
+            border: none;
+            color: var(--gold);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.3rem;
+        }
+        .slider-btn:hover { background: var(--gold); color: black; }
+        .slider-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+        .slider-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .slider-indicator.active {
+            background: var(--gold);
+            width: 28px;
+            border-radius: 20px;
+        }
+        /* contact form */
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-control {
+            padding: 14px 18px;
+            border-radius: 60px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .form-control:focus {
+            border-color: var(--gold);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+        }
+        .submit-btn {
+            background: var(--gold);
+            border: none;
+            padding: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .submit-btn:hover { background: var(--gold-light); transform: scale(0.98); }
+        /* footer */
+        footer {
+            background: #010101;
+            border-top: 3px solid var(--gold);
+            padding: 3rem 2rem 1.5rem;
+        }
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+        .footer-section h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-link {
+            background: rgba(212,175,55,0.2);
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.2s;
+            color: var(--gold);
+        }
+        .social-link:hover { background: var(--gold); color: black; }
+        .contact-item {
+            display: flex;
+            gap: 12px;
+            margin: 1rem 0;
+            align-items: center;
+        }
+        .contact-item i { color: var(--gold); width: 24px; }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(212,175,55,0.2);
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--gold);
+            width: 48px;
+            height: 48px;
+            border-radius: 60px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.2s;
+            font-size: 1.3rem;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
-
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 1rem;
-        }
-
-        .service-card {
-            background: var(--accent-white);
-            color: var(--primary-black);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: var(--transition);
-            border: 1px solid #e0e0e0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--primary-gold);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-gold);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
-        }
-
-        .service-card h3 i {
-            color: var(--primary-gold);
-            margin-right: 8px;
-        }
-
-        .service-card li::before {
-            content: '✓';
-            color: var(--primary-gold);
-            font-weight: bold;
-        }
-
-        /* Features Section - Gold Accent */
-        .features-section {
-            background: linear-gradient(135deg, var(--primary-black), #1a1a1a);
-            color: var(--accent-white);
-            border-top: 3px solid var(--primary-gold);
-        }
-        .features-section h2 {
-            color: var(--accent-white);
-        }
-        .feature-card {
-            background: rgba(212, 175, 55, 0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--primary-gold);
-        }
-        .feature-card:hover {
-            background: rgba(212, 175, 55, 0.2);
-        }
-        .feature-icon {
-            color: var(--primary-gold);
-        }
-
-        /* Tools Section */
-        .tools-section {
-            background: var(--accent-white);
-        }
-        .tool-card {
-            border-bottom: 3px solid var(--primary-gold);
-        }
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Pricing Section */
-        .pricing-section {
-            background: linear-gradient(135deg, var(--primary-black), #111);
-            color: var(--accent-white);
-            border-top: 3px solid var(--primary-gold);
-        }
-        .pricing-section h2 {
-            color: var(--accent-white);
-        }
-        .pricing-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--primary-gold);
-        }
-        .pricing-card.featured {
-            border: 2px solid var(--accent-yellow);
-            background: rgba(212, 175, 55, 0.15);
-        }
-        .price {
-            color: var(--accent-yellow);
-        }
-        .pricing-features li::before {
-            color: var(--accent-green);
-        }
-
-        /* Service Areas */
-        .service-areas {
-            background: var(--accent-white);
-        }
-        .area-card {
-            border: 1px solid var(--primary-gold);
-            transition: var(--transition);
-        }
-        .area-card:hover {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-        }
-        .area-card:hover h3 {
-            color: var(--primary-black);
-        }
-
-        /* Gallery Slider */
-        .gallery-container {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid var(--primary-gold);
-        }
-        .gallery-caption {
-            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(212, 175, 55, 0.7));
-        }
-        .slider-indicator.active {
-            background: var(--primary-gold);
-        }
-
-        /* Testimonials */
-        .testimonials {
-            background: linear-gradient(135deg, var(--primary-black), #1a1a1a);
-            color: var(--accent-white);
-            border-top: 3px solid var(--primary-gold);
-        }
-        .testimonials h2 {
-            color: var(--accent-white);
-        }
-        .testimonial-content {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--primary-gold);
-        }
-        .testimonial-author {
-            color: var(--primary-gold);
-        }
-
-        /* About Section */
-        .about-content {
-            background: var(--accent-white);
-            color: var(--primary-black);
-        }
-        .about-content h3 {
-            color: var(--primary-black);
-        }
-        .about-content h3::after {
-            background: var(--primary-gold);
-        }
-
-        /* Contact Form */
-        .contact-form {
-            background: var(--accent-white);
-        }
-        .form-group label {
-            color: var(--primary-black);
-        }
-        .form-control:focus {
-            border-color: var(--primary-gold);
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
-        }
-        .submit-btn {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-            font-weight: bold;
-        }
-        .submit-btn:hover {
-            background: var(--accent-yellow);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-black);
-            color: var(--accent-white);
-            border-top: 4px solid var(--primary-gold);
-        }
-        .footer-section h3 {
-            color: var(--primary-gold);
-            text-align: left;
-        }
-        .social-link {
-            background: rgba(212, 175, 55, 0.2);
-            border: 1px solid var(--primary-gold);
-        }
-        .social-link:hover {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-        }
-        .contact-item i {
-            color: var(--primary-gold);
-        }
-        .footer-bottom a {
-            color: var(--primary-gold);
-        }
-
-        /* Back to Top */
-        .back-to-top {
-            background: var(--primary-gold);
-            color: var(--primary-black);
-        }
-        .back-to-top:hover {
-            background: var(--accent-yellow);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
+        /* responsive */
+        @media (max-width: 900px) {
             .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
+                padding: 0.8rem 1.2rem;
             }
             nav {
-                flex-direction: column;
                 display: none;
+                flex-direction: column;
+                background: rgba(0,0,0,0.95);
+                backdrop-filter: blur(20px);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                padding: 1.5rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--gold);
             }
             nav.active {
                 display: flex;
             }
             .mobile-menu-btn {
                 display: block;
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
             }
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.4rem;
             }
-            .services-grid, .pricing-grid {
-                grid-template-columns: 1fr;
+            section {
+                padding: 1.8rem;
             }
-            .mission-vision-container {
-                flex-direction: column;
-                align-items: center;
+            .gallery-slide img {
+                height: 320px;
             }
         }
-        @media (max-width: 480px) {
-            section {
-                padding: 1.5rem;
+        @media (max-width: 550px) {
+            .hero {
+                padding: 3rem 1rem;
             }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .mission-box, .vision-box {
+                min-width: 100%;
+            }
+        }
+        /* dark mode manual toggle */
+        body.dark-mode {
+            background: #0a0a0a;
+        }
+        body.dark-mode section:not(.features-section):not(.pricing-section):not(.testimonials) {
+            background: #111;
+            color: #eee;
+            border-top-color: var(--gold);
+        }
+        body.dark-mode .service-card, body.dark-mode .area-card {
+            background: #1a1a1a;
+            color: #f0f0f0;
+        }
+        body.dark-mode .form-control {
+            background: #2c2c2c;
+            border-color: #444;
+            color: white;
         }
     </style>
 </head>
@@ -664,80 +637,146 @@
 
     <header>
         <div class="header-content">
-            <img src="images/gslogo.png" alt="GoldenShine Limited Logo" class="logo">
-            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            <img src="https://placehold.co/120x50?text=GoldenShine" alt="GoldenShine Limited Logo" class="logo">
+            <button class="mobile-menu-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
             <nav>
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#features">Features</a>
-                <a href="#tools">Tools</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#areas">Service Areas</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+                <a href="#home">Home</a><a href="#services">Services</a><a href="#features">Features</a><a href="#pricing">Pricing</a>
+                <a href="#areas">Areas</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#contact">Contact</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Dark mode"><i class="fas fa-moon"></i></button>
             </nav>
         </div>
     </header>
 
     <section class="hero" id="home">
-        <h1 class="animated-text">Welcome to GoldenShine Limited</h1>
-        <p class="animated-subtitle">Professional cleaning services that transform your spaces into pristine environments</p>
+        <h1>GoldenShine Limited</h1>
+        <p>Professional cleaning that transforms your spaces — premium, eco-friendly, and reliable.</p>
         <div>
-            <a href="#contact" class="cta-button floating">Get a Free Quote</a>
-            <a href="#services" class="cta-button secondary floating">Our Services</a>
-            <button class="share-btn floating" id="shareBtn"><i class="fas fa-share-alt"></i> Share</button>
+            <a href="#contact" class="cta-button">✨ Free Quote</a>
+            <a href="#services" class="cta-button secondary">Our Services</a>
+            <button class="share-btn" id="shareBtn"><i class="fas fa-share-alt"></i> Share</button>
         </div>
         <div class="mission-vision-container">
-            <div class="mission-box"><h2 class="box-title">Our Mission</h2><p>To deliver reliable, professional, and personalized cleaning and organizing solutions that enhance our clients' well-being and productivity.</p></div>
-            <div class="vision-box"><h2 class="box-title">Our Vision</h2><p>To transform spaces into clean, organized, harmonious, and inviting environments with innovative and sustainable cleaning solutions.</p></div>
+            <div class="mission-box"><h2 class="box-title">🌟 Our Mission</h2><p>Deliver reliable, professional, personalized cleaning solutions that enhance well-being and productivity.</p></div>
+            <div class="vision-box"><h2 class="box-title">👁️ Our Vision</h2><p>Transform spaces into clean, organized, harmonious environments with innovative sustainable solutions.</p></div>
         </div>
     </section>
 
     <main id="main-content">
-        <section id="services"><h2>Our Services</h2><div class="services-grid"><div class="service-card"><h3><i class="fas fa-home"></i> General Cleaning</h3><ul><li>Residential Cleaning</li><li>Office Cleaning</li><li>Commercial Property Cleaning</li><li>Estate Cleaning</li><li>Regular Maintenance Cleaning</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem; display:inline-block;">Get Quote</a></div><div class="service-card"><h3><i class="fas fa-broom"></i> Specialized Cleaning</h3><ul><li>Post-Construction Cleaning</li><li>Move In/Out Cleaning</li><li>After Party Cleaning</li><li>Carpet, Step & Mattress Cleaning</li><li>Deep Cleaning Services</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem;">Get Quote</a></div><div class="service-card"><h3><i class="fas fa-bug"></i> Fumigation & Pest Control</h3><ul><li>Fumigation Services</li><li>Cockroach Elimination</li><li>Bedbug Eradication</li><li>Mosquito & Termite Control</li><li>Rat & Bat Elimination</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem;">Get Quote</a></div><div class="service-card"><h3><i class="fas fa-spray-can"></i> Outdoor & Surface Cleaning</h3><ul><li>Tile Cleaning</li><li>Terrazzo Cleaning</li><li>Cabro Cleaning</li><li>Upholstery & Duvet Cleaning</li><li>Pressure Washing</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem;">Get Quote</a></div><div class="service-card"><h3><i class="fas fa-tint"></i> Water & Drain Cleaning</h3><ul><li>Water Tank Cleaning</li><li>Drain Unclogging</li><li>Sewage Cleaning</li><li>Flood Restoration</li><li>Septic Tank Cleaning</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem;">Get Quote</a></div><div class="service-card"><h3><i class="fas fa-leaf"></i> Landscaping & Gardening</h3><ul><li>Lawn Care & Maintenance</li><li>Flower Bed Planting</li><li>Hedge & Shrub Trimming</li><li>Garden Design & Installation</li><li>Seasonal Planting</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem;">Get Quote</a></div></div></section>
+        <section id="services"><h2>✨ Premium Services</h2><div class="services-grid">
+            <div class="service-card"><h3><i class="fas fa-home"></i> General Cleaning</h3><ul><li>Residential & Office</li><li>Commercial & Estate</li><li>Regular Maintenance</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem; display:inline-block; padding:0.5rem 1.5rem;">Get Quote</a></div>
+            <div class="service-card"><h3><i class="fas fa-broom"></i> Specialized Cleaning</h3><ul><li>Post-Construction</li><li>Move In/Out</li><li>Carpet & Mattress</li></ul><a href="#contact" class="cta-button" style="margin-top:1rem;">Get Quote</a></div>
+            <div class="service-card"><h3><i class="fas fa-bug"></i> Pest Control</h3><ul><li>Fumigation</li><li>Cockroach & Bedbug</li><li>Mosquito & Termite</li></ul><a href="#contact" class="cta-button">Get Quote</a></div>
+            <div class="service-card"><h3><i class="fas fa-spray-can"></i> Outdoor Cleaning</h3><ul><li>Pressure Washing</li><li>Cabro & Terrazzo</li><li>Upholstery</li></ul><a href="#contact" class="cta-button">Get Quote</a></div>
+            <div class="service-card"><h3><i class="fas fa-tint"></i> Water & Drain</h3><ul><li>Water Tank Cleaning</li><li>Drain Unclogging</li><li>Septic & Sewage</li></ul><a href="#contact" class="cta-button">Get Quote</a></div>
+            <div class="service-card"><h3><i class="fas fa-leaf"></i> Landscaping</h3><ul><li>Lawn Care</li><li>Hedge Trimming</li><li>Garden Design</li></ul><a href="#contact" class="cta-button">Get Quote</a></div>
+        </div></section>
 
-        <section id="features" class="features-section"><h2>Why Choose GoldenShine?</h2><div class="features-grid"><div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>Fully Insured</h3><p>We're fully insured for your peace of mind.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-clock"></i></div><h3>24/7 Availability</h3><p>Emergency services available round the clock.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-leaf"></i></div><h3>Eco-Friendly</h3><p>We use environmentally safe products.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-award"></i></div><h3>Certified Professionals</h3><p>Trained and certified cleaning experts.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-thumbs-up"></i></div><h3>Satisfaction Guarantee</h3><p>We guarantee your satisfaction.</p></div><div class="feature-card"><div class="feature-icon"><i class="fas fa-truck"></i></div><h3>Quick Response</h3><p>Fast response to service requests.</p></div></div></section>
+        <section id="features" class="features-section"><h2>Why Choose GoldenShine?</h2><div class="features-grid">
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>Fully Insured</h3><p>Peace of mind guaranteed</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-clock"></i></div><h3>24/7 Availability</h3><p>Emergency ready</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-leaf"></i></div><h3>Eco-Friendly</h3><p>Safe products</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-award"></i></div><h3>Certified Pros</h3><p>Experts you trust</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-thumbs-up"></i></div><h3>Satisfaction Guarantee</h3><p>We make it right</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-truck"></i></div><h3>Quick Response</h3><p>Same day service</p></div>
+        </div></section>
 
-        <section id="pricing" class="pricing-section"><h2>Our Pricing Plans</h2><div class="pricing-grid"><div class="pricing-card"><h3>Basic Cleaning</h3><div class="price">KSh 2,500<span class="price-period">/session</span></div><ul class="pricing-features"><li>General surface cleaning</li><li>Dusting and vacuuming</li><li>Up to 3 hours</li></ul><a href="#contact" class="cta-button">Book Now</a></div><div class="pricing-card featured"><h3>Standard Cleaning</h3><div class="price">KSh 4,500<span class="price-period">/session</span></div><ul class="pricing-features"><li>Deep kitchen & bathroom</li><li>Window cleaning (interior)</li><li>Up to 5 hours</li></ul><a href="#contact" class="cta-button">Book Now</a></div><div class="pricing-card"><h3>Premium Cleaning</h3><div class="price">KSh 7,500<span class="price-period">/session</span></div><ul class="pricing-features"><li>Carpet & upholstery</li><li>Exterior windows</li><li>Up to 8 hours</li></ul><a href="#contact" class="cta-button">Book Now</a></div></div></section>
+        <section id="pricing" class="pricing-section"><h2>Simple Pricing</h2><div class="pricing-grid">
+            <div class="pricing-card"><h3>Basic</h3><div class="price">KSh 2,500</div><ul class="pricing-features"><li>General dusting & vacuum</li><li>Up to 3 hours</li></ul><a href="#contact" class="cta-button">Book Now</a></div>
+            <div class="pricing-card featured"><h3>Standard ⭐</h3><div class="price">KSh 4,500</div><ul class="pricing-features"><li>Deep kitchen & bath</li><li>Interior windows</li><li>5 hours</li></ul><a href="#contact" class="cta-button">Book Now</a></div>
+            <div class="pricing-card"><h3>Premium</h3><div class="price">KSh 7,500</div><ul class="pricing-features"><li>Carpet + upholstery</li><li>Exterior windows</li><li>Up to 8h</li></ul><a href="#contact" class="cta-button">Book Now</a></div>
+        </div></section>
 
-        <section id="areas" class="service-areas"><h2>Service Areas - Nairobi & Surrounding</h2><div class="areas-grid"><div class="area-card"><h3>Westlands</h3></div><div class="area-card"><h3>Kilimani</h3></div><div class="area-card"><h3>Karen</h3></div><div class="area-card"><h3>Runda</h3></div><div class="area-card"><h3>Kiambu County</h3><p>Thika, Ruiru</p></div><div class="area-card"><h3>Machakos County</h3><p>Athi River, Syokimau</p></div></div></section>
+        <section id="areas" class="service-areas"><h2>📍 Service Areas</h2><div class="areas-grid">
+            <div class="area-card"><h3>Westlands</h3></div><div class="area-card"><h3>Kilimani</h3></div><div class="area-card"><h3>Karen</h3></div>
+            <div class="area-card"><h3>Runda</h3></div><div class="area-card"><h3>Kiambu (Thika, Ruiru)</h3></div><div class="area-card"><h3>Machakos (Athi River)</h3></div>
+        </div></section>
 
-        <section id="gallery"><h2>Our Work Gallery</h2><div class="gallery-container"><div class="slider-controls"><button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button><button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button></div><div class="gallery-slider"><div class="gallery-slide"><img src="images/residential.jpeg" alt="Residential Cleaning" style="width:100%; height:500px; object-fit:cover;"><div class="gallery-caption">Home Deep Cleaning</div></div><div class="gallery-slide"><img src="images/officecleaning.jpeg" alt="Commercial Cleaning" style="width:100%; height:500px; object-fit:cover;"><div class="gallery-caption">Office Space Cleaning</div></div><div class="gallery-slide"><img src="images/pestcontrol.jpeg" alt="Fumigation" style="width:100%; height:500px; object-fit:cover;"><div class="gallery-caption">Pest Control</div></div></div><div class="slider-indicators"><span class="slider-indicator active"></span><span class="slider-indicator"></span><span class="slider-indicator"></span></div></div></section>
+        <section id="gallery"><h2>📸 Our Work</h2><div class="gallery-container"><div class="slider-controls"><button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button><button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button></div>
+        <div class="gallery-slider"><div class="gallery-slide"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Residential Cleaning"><div class="gallery-caption">✨ Deep Home Cleaning</div></div>
+        <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Office Cleaning"><div class="gallery-caption">🏢 Office & Commercial</div></div>
+        <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1533936654325-8489f8a4d51b?auto=format&fit=crop&w=2070&q=80" alt="Pest Control"><div class="gallery-caption">🐜 Professional Fumigation</div></div></div>
+        <div class="slider-indicators"><span class="slider-indicator active"></span><span class="slider-indicator"></span><span class="slider-indicator"></span></div></div></section>
 
-        <section id="about"><h2>About Us</h2><div class="about-content"><p>GoldenShine Limited is dedicated to providing terrific cleaning and organizing services customized to meet the unique needs of both residential and commercial clients.</p><h3>Our History</h3><p>Founded in 2022, GoldenShine Ltd has grown into one of Nairobi's most trusted cleaning service providers.</p><h3>Our Team</h3><p>Highly trained, certified professionals passionate about delivering exceptional results.</p></div></section>
+        <section id="about"><h2>About GoldenShine</h2><div class="about-content"><p>We redefine cleanliness with excellence, integrity, and gold-standard service. Founded in 2022, GoldenShine Ltd is Nairobi’s most trusted cleaning partner.</p><h3 style="margin-top:1rem;">📅 Our History</h3><p>From humble beginnings to industry leaders — we’ve expanded with certified teams and eco-conscious methods.</p><h3>👥 Our Team</h3><p>Passionate, background-checked, and trained to make your space shine like gold.</p></div></section>
 
-        <section id="contact"><h2>Contact Us</h2><div class="contact-form"><form id="contactForm"><div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" class="form-control" required><div class="error-message">Please enter your name</div></div><div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" class="form-control" required><div class="error-message">Valid email required</div></div><div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" class="form-control" required><div class="error-message">Phone required</div></div><div class="form-group"><label for="service">Service Interested In</label><select id="service" name="service" class="form-control" required><option value="">Select</option><option value="general">General Cleaning</option><option value="fumigation">Fumigation</option></select><div class="error-message">Select service</div></div><div class="form-group"><label for="message">Message</label><textarea id="message" name="message" class="form-control" required></textarea><div class="error-message">Message required</div></div><button type="submit" class="submit-btn">Send Message</button></form></div></section>
+        <section id="contact"><h2>📞 Get In Touch</h2><div class="contact-form"><form id="contactForm"><div class="form-group"><label>Full Name</label><input type="text" id="name" class="form-control" required></div><div class="form-group"><label>Email</label><input type="email" id="email" class="form-control" required></div><div class="form-group"><label>Phone</label><input type="tel" id="phone" class="form-control" required></div><div class="form-group"><label>Service</label><select id="service" class="form-control" required><option value="">Select</option><option>General Cleaning</option><option>Fumigation</option><option>Deep Cleaning</option></select></div><div class="form-group"><label>Message</label><textarea id="message" rows="3" class="form-control" required></textarea></div><button type="submit" class="submit-btn">Send Inquiry ✨</button></form></div></section>
     </main>
 
-    <footer><div class="footer-content"><div class="footer-section"><h3>GoldenShine Limited</h3><p>Professional cleaning services for residential and commercial properties.</p><div class="social-links"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-twitter"></i></a><a href="#" class="social-link"><i class="fab fa-instagram"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><p><a href="#home" style="color:white;">Home</a></p><p><a href="#services" style="color:white;">Services</a></p><p><a href="#contact" style="color:white;">Contact</a></p></div><div class="footer-section"><h3>Contact Info</h3><div class="contact-item"><i class="fas fa-phone"></i><span>(+254) 718-292-217</span></div><div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:osodo6724@gmail.com" style="color:white;">osodo6724@gmail.com</a></div></div></div><div class="footer-bottom"><p>&copy; 2025 GoldenShine Limited. All rights reserved.</p></div></footer>
-    <button class="back-to-top"><i class="fas fa-chevron-up"></i></button>
+    <footer><div class="footer-content"><div class="footer-section"><h3>GoldenShine Ltd</h3><p>Shine beyond expectations.</p><div class="social-links"><a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="#" class="social-link"><i class="fab fa-twitter"></i></a></div></div><div class="footer-section"><h3>Quick Links</h3><p><a href="#home" style="color:white;">Home</a></p><p><a href="#services" style="color:white;">Services</a></p><p><a href="#contact" style="color:white;">Contact</a></p></div><div class="footer-section"><h3>Contact</h3><div class="contact-item"><i class="fas fa-phone"></i><span>(+254) 718-292-217</span></div><div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:osodo6724@gmail.com" style="color:white;">osodo6724@gmail.com</a></div></div></div><div class="footer-bottom"><p>© 2025 GoldenShine Limited. Quality & Integrity.</p></div></footer>
+    <button class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
 
     <script>
-        // Toast, Theme, Form validation, Sliders, and animations (compacted for brevity but fully functional)
-        const showToast = (msg, type='success') => { const c=document.getElementById('toastContainer'), t=document.createElement('div'); t.className=`toast ${type}`; t.textContent=msg; c.appendChild(t); setTimeout(()=>t.remove(),4000); };
-        document.getElementById('themeToggle').addEventListener('click',()=>{ document.body.classList.toggle('dark-mode'); const isDark=document.body.classList.contains('dark-mode'); document.getElementById('themeToggle').innerHTML=isDark?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'; showToast(`${isDark?'Dark':'Light'} mode`); });
-        document.getElementById('contactForm').addEventListener('submit',async(e)=>{ e.preventDefault(); const btn=e.target.querySelector('.submit-btn'); btn.classList.add('loading'); setTimeout(()=>{ btn.classList.remove('loading'); showToast('Inquiry sent! We’ll contact you soon.','success'); e.target.reset(); },1500); });
-        // Gallery slider basics
-        let idx=0; const slides=document.querySelectorAll('.gallery-slide'), total=slides.length, slider=document.querySelector('.gallery-slider'), indicators=document.querySelectorAll('.slider-indicator');
-        function updateSlider(){ slider.style.transform=`translateX(-${idx*100}%)`; indicators.forEach((ind,i)=>ind.classList.toggle('active',i===idx)); }
-        document.querySelector('.next-btn')?.addEventListener('click',()=>{ idx=(idx+1)%total; updateSlider(); });
-        document.querySelector('.prev-btn')?.addEventListener('click',()=>{ idx=(idx-1+total)%total; updateSlider(); });
-        indicators.forEach((ind,i)=>{ ind.addEventListener('click',()=>{ idx=i; updateSlider(); }); });
-        setInterval(()=>{ idx=(idx+1)%total; updateSlider(); },5000);
-        // Mobile menu
-        document.querySelector('.mobile-menu-btn')?.addEventListener('click',()=>{ document.querySelector('nav').classList.toggle('active'); });
-        // Back to top
-        const backBtn=document.querySelector('.back-to-top'); window.addEventListener('scroll',()=>{ backBtn.classList.toggle('visible',window.scrollY>300); }); backBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-        // Animated text simple
-        const titleSpan=document.querySelector('.animated-text'); if(titleSpan){ const txt=titleSpan.innerText; titleSpan.innerHTML=txt.split('').map(l=>`<span class="letter">${l}</span>`).join(''); }
-        const subSpan=document.querySelector('.animated-subtitle'); if(subSpan){ const txt2=subSpan.innerText; subSpan.innerHTML=txt2.split('').map(l=>`<span class="letter">${l}</span>`).join(''); }
-        setInterval(()=>{ document.querySelectorAll('.animated-text .letter, .animated-subtitle .letter').forEach((l,i)=>{ l.style.color=['#D4AF37','#FFD700','#1E90FF','#32CD32'][i%4]; }); },800);
-        // Intersection Observer fade
-        const observer=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:0.1});
-        document.querySelectorAll('section, .service-card, .feature-card').forEach(el=>{ el.classList.add('fade-in'); observer.observe(el); });
-        document.getElementById('shareBtn')?.addEventListener('click',()=>{ navigator.clipboard?.writeText(window.location.href); showToast('Link copied!'); });
+        // DOM ready
+        (function(){
+            const toastContainer = document.getElementById('toastContainer');
+            function showToast(msg, type='success'){
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = msg;
+                toastContainer.appendChild(toast);
+                setTimeout(()=>toast.remove(), 4000);
+            }
+            // theme toggle
+            const themeBtn = document.getElementById('themeToggle');
+            themeBtn.addEventListener('click',()=>{
+                document.body.classList.toggle('dark-mode');
+                const isDark = document.body.classList.contains('dark-mode');
+                themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                showToast(`${isDark ? 'Dark' : 'Light'} mode activated`, 'success');
+            });
+            // contact form
+            const form = document.getElementById('contactForm');
+            form.addEventListener('submit', async(e)=>{
+                e.preventDefault();
+                const btn = form.querySelector('.submit-btn');
+                btn.classList.add('loading');
+                setTimeout(()=>{
+                    btn.classList.remove('loading');
+                    showToast('✨ Thank you! We will reach out shortly.', 'success');
+                    form.reset();
+                }, 1000);
+            });
+            // gallery slider
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('.gallery-slide');
+            const total = slides.length;
+            const sliderContainer = document.querySelector('.gallery-slider');
+            const indicators = document.querySelectorAll('.slider-indicator');
+            function updateGallery(){
+                if(sliderContainer) sliderContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+                indicators.forEach((ind,i)=> ind.classList.toggle('active', i===slideIndex));
+            }
+            document.querySelector('.next-btn')?.addEventListener('click',()=>{ slideIndex = (slideIndex+1)%total; updateGallery(); });
+            document.querySelector('.prev-btn')?.addEventListener('click',()=>{ slideIndex = (slideIndex-1+total)%total; updateGallery(); });
+            indicators.forEach((ind,i)=> ind.addEventListener('click',()=>{ slideIndex=i; updateGallery(); }));
+            setInterval(()=>{ slideIndex = (slideIndex+1)%total; updateGallery(); }, 5500);
+            // back to top
+            const backBtn = document.querySelector('.back-to-top');
+            window.addEventListener('scroll',()=>{
+                if(window.scrollY > 350) backBtn.classList.add('visible');
+                else backBtn.classList.remove('visible');
+            });
+            backBtn.addEventListener('click',()=> window.scrollTo({top:0, behavior:'smooth'}));
+            // mobile nav toggle
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            menuBtn?.addEventListener('click',()=> nav.classList.toggle('active'));
+            // share btn
+            document.getElementById('shareBtn')?.addEventListener('click',()=>{
+                navigator.clipboard?.writeText(window.location.href);
+                showToast('🔗 Link copied to clipboard!', 'success');
+            });
+            // fade-in observer
+            const observer = new IntersectionObserver((entries)=>{
+                entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });
+            }, {threshold:0.1});
+            document.querySelectorAll('.fade-in, section, .service-card, .feature-card, .pricing-card, .area-card').forEach(el=>{
+                if(!el.classList.contains('hero')) el.classList.add('fade-in');
+                observer.observe(el);
+            });
+            // force hero content visible
+            document.querySelectorAll('.hero, .mission-box, .vision-box').forEach(el=> el.classList.add('visible'));
+        })();
     </script>
 </body>
 </html>
