@@ -29,8 +29,8 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-            background: transparent;  /* Home background transparent — blends with body background */
-            background-color: #0C0E12;  /* deep neutral base for blending */
+            background: transparent;
+            background-color: #0C0E12;
             color: #F5F3F0;
             line-height: 1.5;
             scroll-behavior: smooth;
@@ -38,7 +38,6 @@
             position: relative;
         }
         
-        /* ✨ TRANSPARENT HOME BACKGROUND ENHANCEMENT: body background shows through hero area */
         body::before {
             content: '';
             position: fixed;
@@ -52,10 +51,8 @@
             z-index: -1;
         }
 
-        /* modern font import */
         @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap');
 
-        /* skip link */
         .skip-link {
             position: absolute;
             top: -40px;
@@ -71,7 +68,6 @@
         }
         .skip-link:focus { top: 20px; }
 
-        /* toast refined */
         .toast-container {
             position: fixed;
             bottom: 28px;
@@ -100,7 +96,6 @@
             to { opacity: 1; transform: translateY(0);}
         }
 
-        /* header with soft blur and blend */
         header {
             background: rgba(12, 14, 18, 0.75);
             backdrop-filter: blur(16px);
@@ -120,21 +115,37 @@
             align-items: center;
             gap: 1.5rem;
         }
-        /* Logo image styling - using actual logoNew.jpeg from images folder */
+
+        /* WHITE BACKGROUND WRAPPER FOR LOGO - elegant pill shape */
+        .logo-wrapper {
+            background: #FFFFFF;
+            padding: 6px 20px;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .logo-wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
         .logo-image {
-            height: 52px;
+            height: 56px;
             width: auto;
             display: block;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
-            transition: transform 0.2s ease;
             object-fit: contain;
         }
-        .logo-image:hover {
-            transform: scale(1.02);
-        }
-        /* Keep original text logo hidden, we replace with actual image */
-        .logo-text {
-            display: none;
+        /* fallback text inside white wrapper */
+        .logo-text-fallback {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gold-core), #B8860B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            white-space: nowrap;
         }
         nav {
             display: flex;
@@ -178,7 +189,6 @@
             cursor: pointer;
         }
 
-        /* HERO — transparent background effect: background shows through blend */
         .hero {
             margin-top: 72px;
             padding: 5rem 2rem 6rem;
@@ -203,7 +213,6 @@
             max-width: 680px;
             margin: 0 auto 2rem;
             opacity: 0.92;
-            backdrop-filter: blur(2px);
         }
         .cta-button {
             display: inline-block;
@@ -244,7 +253,6 @@
         }
         .share-btn:hover { background: var(--gold-core); color: black; border-color: var(--gold-core); }
 
-        /* mission vision cards — glassmorphic blend */
         .mission-vision-container {
             display: flex;
             justify-content: center;
@@ -275,7 +283,6 @@
             font-weight: 700;
         }
 
-        /* main container */
         main {
             max-width: 1280px;
             margin: 2rem auto;
@@ -292,7 +299,7 @@
             transition: var(--transition-butter);
             border: 1px solid rgba(228, 184, 62, 0.2);
         }
-        .features-section, .pricing-section, .testimonials {
+        .features-section, .pricing-section {
             background: rgba(12, 14, 19, 0.75);
             backdrop-filter: blur(8px);
         }
@@ -391,7 +398,7 @@
             text-align: center;
             font-weight: 600;
         }
-        /* gallery polished */
+        /* GALLERY with local images */
         .gallery-container {
             position: relative;
             border-radius: 32px;
@@ -464,7 +471,6 @@
             background: var(--gold-core);
             width: 28px;
         }
-        /* contact form transparent blend */
         .contact-form form {
             display: flex;
             flex-direction: column;
@@ -562,7 +568,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* responsive */
         @media (max-width: 900px) {
             .header-content { padding: 0.7rem 1.2rem; }
             nav {
@@ -584,13 +589,15 @@
             section { padding: 1.8rem; }
             .gallery-slide img { height: 320px; }
             .logo-image { height: 44px; }
+            .logo-wrapper { padding: 4px 16px; }
         }
         @media (max-width: 550px) {
             .hero { padding: 2.5rem 1rem; }
             h2 { font-size: 1.8rem; }
             .logo-image { height: 38px; }
+            .logo-wrapper { padding: 3px 12px; }
+            .logo-text-fallback { font-size: 1.1rem; }
         }
-        /* dark mode manual complement (still blending) */
         body.dark-mode {
             background-color: #030507;
         }
@@ -600,6 +607,10 @@
         body.dark-mode .service-card, body.dark-mode .area-card {
             background: rgba(0,0,0,0.6);
         }
+        body.dark-mode .logo-wrapper {
+            background: #1e1e1e;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
 <body>
@@ -608,9 +619,11 @@
 
     <header>
         <div class="header-content">
-            <!-- UPDATED: Using actual logoNew.jpeg from images folder as the logo image -->
-            <img src="images/logoNew.jpeg" alt="GoldenShine Limited - Official Logo" class="logo-image" onerror="this.onerror=null; this.style.display='none'; document.querySelector('.logo-text-fallback').style.display='block';">
-            <div class="logo-text-fallback" style="display: none; font-size: 1.8rem; font-weight:800; background: linear-gradient(135deg, var(--gold-core), #F7E05E); -webkit-background-clip: text; background-clip: text; color: transparent;">✨ GoldenShine</div>
+            <!-- WHITE BACKGROUND WRAPPER FOR LOGO -->
+            <div class="logo-wrapper">
+                <img src="images/logoNew.jpeg" alt="GoldenShine Limited - Official Logo" class="logo-image" onerror="this.onerror=null; this.style.display='none'; this.parentElement.querySelector('.logo-text-fallback').style.display='block';">
+                <div class="logo-text-fallback" style="display: none;">✨ GoldenShine</div>
+            </div>
             <button class="mobile-menu-btn" aria-label="Menu"><i class="fas fa-gem"></i></button>
             <nav>
                 <a href="#home">Home</a><a href="#services">Services</a><a href="#features">Features</a><a href="#pricing">Pricing</a>
@@ -664,11 +677,47 @@
             <div class="area-card"><h3>Runda • Gigiri</h3></div><div class="area-card"><h3>Kiambu (Thika, Ruiru)</h3></div><div class="area-card"><h3>Machakos • Athi River</h3></div>
         </div></section>
 
-        <section id="gallery"><h2>📸 Our Radiance Portfolio</h2><div class="gallery-container"><div class="slider-controls"><button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button><button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button></div>
-        <div class="gallery-slider"><div class="gallery-slide"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Residential deep clean"><div class="gallery-caption">✨ Immaculate Home Detailing</div></div>
-        <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Office Cleaning"><div class="gallery-caption">🏢 Corporate Brilliance</div></div>
-        <div class="gallery-slide"><img src="https://images.unsplash.com/photo-1533936654325-8489f8a4d51b?auto=format&fit=crop&w=2070&q=80" alt="Pest Control"><div class="gallery-caption">🐜 Precision Fumigation</div></div></div>
-        <div class="slider-indicators"><span class="slider-indicator active"></span><span class="slider-indicator"></span><span class="slider-indicator"></span></div></div></section>
+        <!-- GALLERY SECTION WITH LOCAL IMAGES FROM /images FOLDER -->
+        <section id="gallery"><h2>📸 Our Radiance Portfolio</h2><div class="gallery-container">
+            <div class="slider-controls">
+                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="gallery-slider">
+                <div class="gallery-slide">
+                    <img src="images/residential.jpeg" alt="Residential Deep Cleaning">
+                    <div class="gallery-caption">🏠 Residential Brilliance</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="images/officecleaning.jpeg" alt="Office Cleaning Excellence">
+                    <div class="gallery-caption">🏢 Corporate Radiance</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="images/window-cleaning.jpeg" alt="Window Cleaning">
+                    <div class="gallery-caption">✨ Crystal Clear Windows</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="images/kitchencleaning.jpeg" alt="Kitchen Deep Clean">
+                    <div class="gallery-caption">🍳 Kitchen Perfection</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="images/pestcontrol.jpeg" alt="Pest Control Services">
+                    <div class="gallery-caption">🐜 Pest-Free Guarantee</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="images/landscaping.jpeg" alt="Landscaping & Garden">
+                    <div class="gallery-caption">🌿 Lush Garden Design</div>
+                </div>
+            </div>
+            <div class="slider-indicators">
+                <span class="slider-indicator active"></span>
+                <span class="slider-indicator"></span>
+                <span class="slider-indicator"></span>
+                <span class="slider-indicator"></span>
+                <span class="slider-indicator"></span>
+                <span class="slider-indicator"></span>
+            </div>
+        </div></section>
 
         <section id="about"><h2>About GoldenShine</h2><div class="about-content"><p>We blend high‑tech cleaning with heartfelt service. Since 2022, we’ve been Nairobi’s most radiant choice, delivering premium cleanliness with integrity.</p><h3 style="margin-top:1rem; color:var(--gold-mist);">📜 Our Legacy</h3><p>From a single van to a fleet of certified experts, our gold standard continues to expand.</p><h3 style="color:var(--gold-mist);">🤝 Our Team</h3><p>Background‑checked, passionate artisans of cleanliness — because you deserve a space that shines.</p></div></section>
 
@@ -740,11 +789,11 @@
                 observer.observe(el);
             });
             document.querySelectorAll('.hero, .mission-box, .vision-box').forEach(el=> el.classList.add('visible'));
-            // Fallback: if logo image fails to load, show text logo
             const logoImg = document.querySelector('.logo-image');
             if(logoImg && logoImg.complete && logoImg.naturalWidth === 0) {
                 logoImg.style.display = 'none';
-                document.querySelector('.logo-text-fallback').style.display = 'block';
+                const fallback = document.querySelector('.logo-text-fallback');
+                if(fallback) fallback.style.display = 'block';
             }
         })();
     </script>
