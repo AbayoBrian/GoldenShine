@@ -116,7 +116,6 @@
             gap: 1.5rem;
         }
 
-        /* WHITE BACKGROUND WRAPPER FOR LOGO - elegant pill shape */
         .logo-wrapper {
             background: #FFFFFF;
             padding: 6px 20px;
@@ -137,7 +136,6 @@
             display: block;
             object-fit: contain;
         }
-        /* fallback text inside white wrapper */
         .logo-text-fallback {
             font-size: 1.4rem;
             font-weight: 800;
@@ -328,11 +326,101 @@
             background: var(--gold-core);
             border-radius: 6px;
         }
-        .services-grid, .features-grid, .pricing-grid, .areas-grid {
+        .services-grid, .features-grid, .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
             gap: 2rem;
             margin-top: 1.2rem;
+        }
+        /* NEW STYLES FOR DROPDOWN AREA LIST */
+        .areas-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .area-dropdown-item {
+            background: rgba(30, 32, 38, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            border: 1px solid rgba(228, 184, 62, 0.35);
+            transition: var(--transition-butter);
+            overflow: hidden;
+        }
+        .area-dropdown-item:hover {
+            border-color: var(--gold-core);
+            background: rgba(40, 42, 48, 0.9);
+        }
+        .dropdown-parent {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.8rem;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.25rem;
+            background: rgba(0,0,0,0.2);
+            transition: background 0.2s ease;
+            border-radius: 32px;
+        }
+        .dropdown-parent:hover {
+            background: rgba(228,184,62,0.1);
+        }
+        .dropdown-parent h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: var(--gold-mist);
+            letter-spacing: -0.3px;
+        }
+        .dropdown-parent h3 i {
+            margin-right: 12px;
+            color: var(--gold-core);
+        }
+        .arrow-icon {
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            font-size: 1.2rem;
+            color: var(--gold-core);
+        }
+        .arrow-icon.rotated {
+            transform: rotate(180deg);
+        }
+        .dropdown-children {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.2s ease;
+            background: rgba(12, 14, 18, 0.6);
+            border-top: none;
+            border-radius: 0 0 28px 28px;
+            padding: 0 1.5rem;
+        }
+        .dropdown-children.open {
+            max-height: 600px;  /* enough for all suburbs */
+            padding: 1.2rem 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(228,184,62,0.3);
+        }
+        .children-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.8rem;
+        }
+        .child-location {
+            background: rgba(0,0,0,0.35);
+            padding: 0.6rem 1rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.2s;
+            border: 1px solid rgba(228,184,62,0.2);
+            color: #EFE7D6;
+        }
+        .child-location:hover {
+            background: var(--gold-core);
+            color: #0A0A0A;
+            border-color: transparent;
+            transform: translateY(-2px);
+            cursor: default;
         }
         .service-card, .feature-card, .pricing-card, .area-card {
             background: rgba(30, 32, 38, 0.7);
@@ -343,7 +431,7 @@
             border: 1px solid rgba(228, 184, 62, 0.25);
             box-shadow: 0 6px 12px rgba(0,0,0,0.2);
         }
-        .service-card:hover, .feature-card:hover, .pricing-card:hover, .area-card:hover {
+        .service-card:hover, .feature-card:hover, .pricing-card:hover {
             transform: translateY(-6px);
             border-color: var(--gold-core);
             background: rgba(40, 42, 48, 0.8);
@@ -394,11 +482,6 @@
             list-style: none;
             margin: 1.5rem 0;
         }
-        .area-card {
-            text-align: center;
-            font-weight: 600;
-        }
-        /* GALLERY with local images */
         .gallery-container {
             position: relative;
             border-radius: 32px;
@@ -590,13 +673,14 @@
             .gallery-slide img { height: 320px; }
             .logo-image { height: 44px; }
             .logo-wrapper { padding: 4px 16px; }
+            .children-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 550px) {
             .hero { padding: 2.5rem 1rem; }
             h2 { font-size: 1.8rem; }
             .logo-image { height: 38px; }
             .logo-wrapper { padding: 3px 12px; }
-            .logo-text-fallback { font-size: 1.1rem; }
+            .children-grid { grid-template-columns: 1fr; }
         }
         body.dark-mode {
             background-color: #030507;
@@ -604,7 +688,7 @@
         body.dark-mode section {
             background: rgba(8, 10, 15, 0.85);
         }
-        body.dark-mode .service-card, body.dark-mode .area-card {
+        body.dark-mode .area-dropdown-item {
             background: rgba(0,0,0,0.6);
         }
         body.dark-mode .logo-wrapper {
@@ -619,7 +703,6 @@
 
     <header>
         <div class="header-content">
-            <!-- WHITE BACKGROUND WRAPPER FOR LOGO -->
             <div class="logo-wrapper">
                 <img src="images/logoNew.jpeg" alt="GoldenShine Limited - Official Logo" class="logo-image" onerror="this.onerror=null; this.style.display='none'; this.parentElement.querySelector('.logo-text-fallback').style.display='block';">
                 <div class="logo-text-fallback" style="display: none;">✨ GoldenShine</div>
@@ -672,51 +755,23 @@
             <div class="pricing-card"><h3>Golden Elite</h3><div class="price">KSh 8,490</div><ul class="pricing-features"><li>Carpet + upholstery</li><li>Exterior glass cleaning</li><li>8h full transformation</li></ul><a href="#contact" class="cta-button">Get Royal Clean</a></div>
         </div></section>
 
-        <section id="areas" class="service-areas"><h2>📍 Where We Serve</h2><div class="areas-grid">
-            <div class="area-card"><h3>Westlands • Lavington</h3></div><div class="area-card"><h3>Kilimani • Kileleshwa</h3></div><div class="area-card"><h3>Karen • Hardy</h3></div>
-            <div class="area-card"><h3>Runda • Gigiri</h3></div><div class="area-card"><h3>Kiambu (Thika, Ruiru)</h3></div><div class="area-card"><h3>Machakos • Athi River</h3></div>
-        </div></section>
+        <!-- UPDATED AREAS SECTION: DROPDOWN PARENT-CHILD -->
+        <section id="areas" class="service-areas"><h2>📍 Where We Serve</h2><div class="areas-grid" id="areasDropdownContainer"></div></section>
 
-        <!-- GALLERY SECTION WITH LOCAL IMAGES FROM /images FOLDER -->
         <section id="gallery"><h2>📸 Our Radiance Portfolio</h2><div class="gallery-container">
             <div class="slider-controls">
                 <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                 <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="gallery-slider">
-                <div class="gallery-slide">
-                    <img src="images/residential.jpeg" alt="Residential Deep Cleaning">
-                    <div class="gallery-caption">🏠 Residential Brilliance</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="images/officecleaning.jpeg" alt="Office Cleaning Excellence">
-                    <div class="gallery-caption">🏢 Corporate Radiance</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="images/window-cleaning.jpeg" alt="Window Cleaning">
-                    <div class="gallery-caption">✨ Crystal Clear Windows</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="images/kitchencleaning.jpeg" alt="Kitchen Deep Clean">
-                    <div class="gallery-caption">🍳 Kitchen Perfection</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="images/pestcontrol.jpeg" alt="Pest Control Services">
-                    <div class="gallery-caption">🐜 Pest-Free Guarantee</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="images/landscaping.jpeg" alt="Landscaping & Garden">
-                    <div class="gallery-caption">🌿 Lush Garden Design</div>
-                </div>
+                <div class="gallery-slide"><img src="images/residential.jpeg" alt="Residential Deep Cleaning"><div class="gallery-caption">🏠 Residential Brilliance</div></div>
+                <div class="gallery-slide"><img src="images/officecleaning.jpeg" alt="Office Cleaning Excellence"><div class="gallery-caption">🏢 Corporate Radiance</div></div>
+                <div class="gallery-slide"><img src="images/window-cleaning.jpeg" alt="Window Cleaning"><div class="gallery-caption">✨ Crystal Clear Windows</div></div>
+                <div class="gallery-slide"><img src="images/kitchencleaning.jpeg" alt="Kitchen Deep Clean"><div class="gallery-caption">🍳 Kitchen Perfection</div></div>
+                <div class="gallery-slide"><img src="images/pestcontrol.jpeg" alt="Pest Control Services"><div class="gallery-caption">🐜 Pest-Free Guarantee</div></div>
+                <div class="gallery-slide"><img src="images/landscaping.jpeg" alt="Landscaping & Garden"><div class="gallery-caption">🌿 Lush Garden Design</div></div>
             </div>
-            <div class="slider-indicators">
-                <span class="slider-indicator active"></span>
-                <span class="slider-indicator"></span>
-                <span class="slider-indicator"></span>
-                <span class="slider-indicator"></span>
-                <span class="slider-indicator"></span>
-                <span class="slider-indicator"></span>
-            </div>
+            <div class="slider-indicators"><span class="slider-indicator active"></span><span class="slider-indicator"></span><span class="slider-indicator"></span><span class="slider-indicator"></span><span class="slider-indicator"></span><span class="slider-indicator"></span></div>
         </div></section>
 
         <section id="about"><h2>About GoldenShine</h2><div class="about-content"><p>We blend high‑tech cleaning with heartfelt service. Since 2022, we’ve been Nairobi’s most radiant choice, delivering premium cleanliness with integrity.</p><h3 style="margin-top:1rem; color:var(--gold-mist);">📜 Our Legacy</h3><p>From a single van to a fleet of certified experts, our gold standard continues to expand.</p><h3 style="color:var(--gold-mist);">🤝 Our Team</h3><p>Background‑checked, passionate artisans of cleanliness — because you deserve a space that shines.</p></div></section>
@@ -747,13 +802,7 @@
             const form = document.getElementById('contactForm');
             form.addEventListener('submit', async(e)=>{
                 e.preventDefault();
-                const btn = form.querySelector('.submit-btn');
-                btn.classList.add('loading');
-                setTimeout(()=>{
-                    btn.classList.remove('loading');
-                    showToast('✨ Golden response! Our team will contact you shortly.', 'success');
-                    form.reset();
-                }, 1000);
+                setTimeout(()=>{ showToast('✨ Golden response! Our team will contact you shortly.', 'success'); form.reset(); }, 500);
             });
             let slideIndex = 0;
             const slides = document.querySelectorAll('.gallery-slide');
@@ -784,7 +833,7 @@
             const observer = new IntersectionObserver((entries)=>{
                 entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });
             }, {threshold:0.1});
-            document.querySelectorAll('.fade-in, section, .service-card, .feature-card, .pricing-card, .area-card, .mission-box, .vision-box').forEach(el=>{
+            document.querySelectorAll('.fade-in, section, .service-card, .feature-card, .pricing-card, .area-dropdown-item, .mission-box, .vision-box').forEach(el=>{
                 if(!el.classList.contains('hero')) el.classList.add('fade-in');
                 observer.observe(el);
             });
@@ -794,6 +843,57 @@
                 logoImg.style.display = 'none';
                 const fallback = document.querySelector('.logo-text-fallback');
                 if(fallback) fallback.style.display = 'block';
+            }
+
+            // ========== DROPDOWN AREAS LOGIC (Nairobi + Nearby Counties) ==========
+            const areasData = [
+                { parent: "Nairobi 🌆", icon: "fa-city", children: ["Westlands", "Lavington", "Kilimani", "Kileleshwa", "Karen", "Hardy", "Runda", "Gigiri", "Lang'ata", "South B", "South C", "Eastlands", "Embakasi", "Buruburu", "Donholm", "Parklands", "Highridge", "Madaraka Estate"] },
+                { parent: "Kiambu County 🌳", icon: "fa-tree", children: ["Thika", "Ruiru", "Kiambu Town", "Kikuyu", "Limuru", "Juja", "Githunguri", "Karuri", "Ndumberi", "Tigoni"] },
+                { parent: "Machakos County ⛰️", icon: "fa-mountain", children: ["Athi River", "Machakos Town", "Syokimau", "Mlolongo", "Kinanie", "Katani", "Joska", "Tala", "Kangundo"] },
+                { parent: "Kajiado County 🦒", icon: "fa-tree", children: ["Ngong", "Kiserian", "Ongata Rongai", "Kitengela", "Isinya", "Namanga", "Bissil", "Loitokitok"] },
+                { parent: "Murang'a County 🍃", icon: "fa-leaf", children: ["Murang'a Town", "Kangari", "Kenol", "Makuyu", "Maragua", "Kandara", "Gatanga", "Ithanga"] }
+            ];
+
+            const container = document.getElementById('areasDropdownContainer');
+            if(container) {
+                areasData.forEach(loc => {
+                    const dropdownItem = document.createElement('div');
+                    dropdownItem.className = 'area-dropdown-item';
+                    
+                    const parentDiv = document.createElement('div');
+                    parentDiv.className = 'dropdown-parent';
+                    parentDiv.setAttribute('role', 'button');
+                    parentDiv.setAttribute('tabindex', '0');
+                    parentDiv.innerHTML = `<h3><i class="fas ${loc.icon}"></i> ${loc.parent}</h3><i class="fas fa-chevron-down arrow-icon"></i>`;
+                    
+                    const childrenDiv = document.createElement('div');
+                    childrenDiv.className = 'dropdown-children';
+                    const childrenGrid = document.createElement('div');
+                    childrenGrid.className = 'children-grid';
+                    loc.children.forEach(child => {
+                        const childSpan = document.createElement('div');
+                        childSpan.className = 'child-location';
+                        childSpan.innerHTML = `<i class="fas fa-location-dot" style="margin-right:6px; font-size:0.75rem;"></i> ${child}`;
+                        childrenGrid.appendChild(childSpan);
+                    });
+                    childrenDiv.appendChild(childrenGrid);
+                    dropdownItem.appendChild(parentDiv);
+                    dropdownItem.appendChild(childrenDiv);
+                    
+                    const arrowIcon = parentDiv.querySelector('.arrow-icon');
+                    parentDiv.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const isOpen = childrenDiv.classList.contains('open');
+                        if(isOpen) {
+                            childrenDiv.classList.remove('open');
+                            arrowIcon.classList.remove('rotated');
+                        } else {
+                            childrenDiv.classList.add('open');
+                            arrowIcon.classList.add('rotated');
+                        }
+                    });
+                    container.appendChild(dropdownItem);
+                });
             }
         })();
     </script>
