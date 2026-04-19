@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>GoldenShine Limited | Radiance Redefined</title>
+    <title>GoldenShine Cleaning & Organising Services Ltd | Radiance Redefined</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ----- RESET & GLOBAL ----- */
@@ -332,7 +332,7 @@
             gap: 2rem;
             margin-top: 1.2rem;
         }
-        /* NEW STYLES FOR DROPDOWN AREA LIST */
+        /* DROPDOWN AREAS STYLES */
         .areas-grid {
             display: flex;
             flex-direction: column;
@@ -395,7 +395,7 @@
             padding: 0 1.5rem;
         }
         .dropdown-children.open {
-            max-height: 600px;  /* enough for all suburbs */
+            max-height: 600px;
             padding: 1.2rem 1.5rem 1.5rem 1.5rem;
             border-top: 1px solid rgba(228,184,62,0.3);
         }
@@ -422,7 +422,7 @@
             transform: translateY(-2px);
             cursor: default;
         }
-        .service-card, .feature-card, .pricing-card, .area-card {
+        .service-card, .feature-card, .pricing-card {
             background: rgba(30, 32, 38, 0.7);
             backdrop-filter: blur(8px);
             padding: 1.8rem;
@@ -622,6 +622,12 @@
             color: var(--gold-core);
         }
         .social-link:hover { background: var(--gold-core); color: black; }
+        .contact-item {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
         .back-to-top {
             position: fixed;
             bottom: 2rem;
@@ -673,14 +679,11 @@
             .gallery-slide img { height: 320px; }
             .logo-image { height: 44px; }
             .logo-wrapper { padding: 4px 16px; }
-            .children-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 550px) {
             .hero { padding: 2.5rem 1rem; }
             h2 { font-size: 1.8rem; }
             .logo-image { height: 38px; }
-            .logo-wrapper { padding: 3px 12px; }
-            .children-grid { grid-template-columns: 1fr; }
         }
         body.dark-mode {
             background-color: #030507;
@@ -704,7 +707,7 @@
     <header>
         <div class="header-content">
             <div class="logo-wrapper">
-                <img src="images/logoNew.jpeg" alt="GoldenShine Limited - Official Logo" class="logo-image" onerror="this.onerror=null; this.style.display='none'; this.parentElement.querySelector('.logo-text-fallback').style.display='block';">
+                <img src="images/logoNew.jpeg" alt="GoldenShine Cleaning & Organising Services Ltd - Official Logo" class="logo-image" onerror="this.onerror=null; this.style.display='none'; this.parentElement.querySelector('.logo-text-fallback').style.display='block';">
                 <div class="logo-text-fallback" style="display: none;">✨ GoldenShine</div>
             </div>
             <button class="mobile-menu-btn" aria-label="Menu"><i class="fas fa-gem"></i></button>
@@ -717,16 +720,16 @@
     </header>
 
     <section class="hero" id="home">
-        <h1>GoldenShine Limited</h1>
-        <p>Where precision meets brilliance — eco‑luxury cleaning that transforms every corner.</p>
+        <h1>GoldenShine Cleaning & Organising Services Ltd</h1>
+        <p>Professional cleaning company based in Nairobi, Kenya. We specialize in delivering high-quality residential and commercial cleaning services tailored to meet our clients’ needs.</p>
         <div>
             <a href="#contact" class="cta-button">✨ Claim Free Quote</a>
             <a href="#services" class="cta-button secondary">Explore Services</a>
             <button class="share-btn" id="shareBtn"><i class="fas fa-share-alt"></i> Share</button>
         </div>
         <div class="mission-vision-container">
-            <div class="mission-box"><h2 class="box-title">🌟 Our Mission</h2><p>Elevate everyday spaces with impeccable, sustainable cleaning that inspires confidence and wellbeing.</p></div>
-            <div class="vision-box"><h2 class="box-title">✨ Our Vision</h2><p>To be the hallmark of radiant cleanliness across Africa, blending innovation with golden standards.</p></div>
+            <div class="mission-box"><h2 class="box-title">🌟 Our Mission</h2><p>To provide reliable, affordable, and high-quality cleaning services that exceed customer expectations.</p></div>
+            <div class="vision-box"><h2 class="box-title">✨ Our Vision</h2><p>To become the leading cleaning and organising service provider in Kenya.</p></div>
         </div>
     </section>
 
@@ -740,13 +743,13 @@
             <div class="service-card"><h3><i class="fas fa-tree"></i> Landscape & Garden</h3><ul><li>Lawn mowing & hedge</li><li>Garden waste removal</li><li>Irrigation checks</li></ul><a href="#contact" class="cta-button">Get Quote</a></div>
         </div></section>
 
-        <section id="features" class="features-section"><h2>Why We Shine Brightest</h2><div class="features-grid">
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-certificate"></i></div><h3>Fully Insured</h3><p>Complete protection & trust</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-clock"></i></div><h3>Same‑Day Service</h3><p>Rapid response team</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-seedling"></i></div><h3>Green Chemistry</h3><p>Child & pet safe</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-medal"></i></div><h3>Gold Standard Pros</h3><p>Background-checked staff</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-smile-beam"></i></div><h3>100% Happiness</h3><p>Or we re‑clean free</p></div>
-            <div class="feature-card"><div class="feature-icon"><i class="fas fa-hand-sparkles"></i></div><h3>24/7 Concierge</h3><p>Always here for you</p></div>
+        <section id="features" class="features-section"><h2>✨ Why Choose Us</h2><div class="features-grid">
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-user-graduate"></i></div><h3>Professional & Trained Staff</h3><p>Certified experts with background checks</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-tags"></i></div><h3>Affordable Pricing</h3><p>Premium quality without breaking the bank</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-clock"></i></div><h3>Reliable & Timely Service</h3><p>We respect your schedule, always on time</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-leaf"></i></div><h3>Eco-Friendly Products</h3><p>Safe for children, pets & the planet</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-hand-sparkles"></i></div><h3>100% Satisfaction</h3><p>We re-clean for free if you're not happy</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>Fully Insured</h3><p>Complete peace of mind for every job</p></div>
         </div></section>
 
         <section id="pricing" class="pricing-section"><h2>Transparent Pricing</h2><div class="pricing-grid">
@@ -755,31 +758,21 @@
             <div class="pricing-card"><h3>Golden Elite</h3><div class="price">KSh 8,490</div><ul class="pricing-features"><li>Carpet + upholstery</li><li>Exterior glass cleaning</li><li>8h full transformation</li></ul><a href="#contact" class="cta-button">Get Royal Clean</a></div>
         </div></section>
 
-        <!-- UPDATED AREAS SECTION: DROPDOWN PARENT-CHILD -->
+        <!-- DROPDOWN AREAS SECTION -->
         <section id="areas" class="service-areas"><h2>📍 Where We Serve</h2><div class="areas-grid" id="areasDropdownContainer"></div></section>
 
         <section id="gallery"><h2>📸 Our Radiance Portfolio</h2><div class="gallery-container">
-            <div class="slider-controls">
-                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div class="gallery-slider">
-                <div class="gallery-slide"><img src="images/residential.jpeg" alt="Residential Deep Cleaning"><div class="gallery-caption">🏠 Residential Brilliance</div></div>
-                <div class="gallery-slide"><img src="images/officecleaning.jpeg" alt="Office Cleaning Excellence"><div class="gallery-caption">🏢 Corporate Radiance</div></div>
-                <div class="gallery-slide"><img src="images/window-cleaning.jpeg" alt="Window Cleaning"><div class="gallery-caption">✨ Crystal Clear Windows</div></div>
-                <div class="gallery-slide"><img src="images/kitchencleaning.jpeg" alt="Kitchen Deep Clean"><div class="gallery-caption">🍳 Kitchen Perfection</div></div>
-                <div class="gallery-slide"><img src="images/pestcontrol.jpeg" alt="Pest Control Services"><div class="gallery-caption">🐜 Pest-Free Guarantee</div></div>
-                <div class="gallery-slide"><img src="images/landscaping.jpeg" alt="Landscaping & Garden"><div class="gallery-caption">🌿 Lush Garden Design</div></div>
-            </div>
+            <div class="slider-controls"><button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button><button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button></div>
+            <div class="gallery-slider"><div class="gallery-slide"><img src="images/residential.jpeg" alt="Residential Deep Cleaning"><div class="gallery-caption">🏠 Residential Brilliance</div></div><div class="gallery-slide"><img src="images/officecleaning.jpeg" alt="Office Cleaning Excellence"><div class="gallery-caption">🏢 Corporate Radiance</div></div><div class="gallery-slide"><img src="images/window-cleaning.jpeg" alt="Window Cleaning"><div class="gallery-caption">✨ Crystal Clear Windows</div></div><div class="gallery-slide"><img src="images/kitchencleaning.jpeg" alt="Kitchen Deep Clean"><div class="gallery-caption">🍳 Kitchen Perfection</div></div><div class="gallery-slide"><img src="images/pestcontrol.jpeg" alt="Pest Control Services"><div class="gallery-caption">🐜 Pest-Free Guarantee</div></div><div class="gallery-slide"><img src="images/landscaping.jpeg" alt="Landscaping & Garden"><div class="gallery-caption">🌿 Lush Garden Design</div></div></div>
             <div class="slider-indicators"><span class="slider-indicator active"></span><span class="slider-indicator"></span><span class="slider-indicator"></span><span class="slider-indicator"></span><span class="slider-indicator"></span><span class="slider-indicator"></span></div>
         </div></section>
 
-        <section id="about"><h2>About GoldenShine</h2><div class="about-content"><p>We blend high‑tech cleaning with heartfelt service. Since 2022, we’ve been Nairobi’s most radiant choice, delivering premium cleanliness with integrity.</p><h3 style="margin-top:1rem; color:var(--gold-mist);">📜 Our Legacy</h3><p>From a single van to a fleet of certified experts, our gold standard continues to expand.</p><h3 style="color:var(--gold-mist);">🤝 Our Team</h3><p>Background‑checked, passionate artisans of cleanliness — because you deserve a space that shines.</p></div></section>
+        <section id="about"><h2>About GoldenShine</h2><div class="about-content"><p>GoldenShine Cleaning & Organising Services Ltd is a professional cleaning company based in Nairobi, Kenya. We blend high‑tech cleaning with heartfelt service, delivering premium cleanliness with integrity.</p><h3 style="margin-top:1rem; color:var(--gold-mist);">📜 Our Legacy</h3><p>From a single van to a fleet of certified experts, our gold standard continues to expand across Nairobi and beyond.</p><h3 style="color:var(--gold-mist);">🤝 Our Team</h3><p>Background‑checked, passionate artisans of cleanliness — because you deserve a space that shines.</p></div></section>
 
         <section id="contact"><h2>📞 Radiant Inquiries</h2><div class="contact-form"><form id="contactForm"><div class="form-group"><label>Full Name</label><input type="text" id="name" class="form-control" required></div><div class="form-group"><label>Email</label><input type="email" id="email" class="form-control" required></div><div class="form-group"><label>Phone</label><input type="tel" id="phone" class="form-control" required></div><div class="form-group"><label>Select Service</label><select id="service" class="form-control" required><option value="">Choose brilliance</option><option>General Cleaning</option><option>Fumigation / Pest</option><option>Deep Cleaning Elite</option></select></div><div class="form-group"><label>Message</label><textarea id="message" rows="3" class="form-control" required placeholder="Tell us about your space..."></textarea></div><button type="submit" class="submit-btn">Send Request ✨</button></form></div></section>
     </main>
 
-    <footer><div class="footer-content"><div class="footer-section"><h3>GoldenShine Ltd</h3><p>Where shine meets gold.</p><div class="social-links"><a href="https://www.facebook.com/share/1AhpP2YeRS/" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="https://www.facebook.com/share/1AhpP2YeRS/" class="social-link"><i class="fab fa-twitter"></i></a></div></div><div class="footer-section"><h3>Navigate</h3><p><a href="#home" style="color:white;">Home</a></p><p><a href="#services" style="color:white;">Services</a></p><p><a href="#contact" style="color:white;">Contact</a></p></div><div class="footer-section"><h3>Connect</h3><div class="contact-item"><i class="fas fa-phone-alt" style="color:var(--gold-core);"></i><span>(+254) 718 292 217</span></div><div class="contact-item"><i class="fas fa-envelope" style="color:var(--gold-core);"></i><a href="mailto:goldenshine076@gmail.com" style="color:white;">goldenshine076@gmail.com</a></div></div></div><div class="footer-bottom"><p>© 2025 GoldenShine Limited — Radiance Beyond Standards</p></div></footer>
+    <footer><div class="footer-content"><div class="footer-section"><h3>GoldenShine Cleaning & Organising Services Ltd</h3><p>Where shine meets gold.</p><div class="social-links"><a href="https://www.facebook.com/share/1AhpP2YeRS/" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-link"><i class="fab fa-instagram"></i></a><a href="https://www.facebook.com/share/1AhpP2YeRS/" class="social-link"><i class="fab fa-twitter"></i></a></div></div><div class="footer-section"><h3>Contact Us</h3><div class="contact-item"><i class="fas fa-phone-alt" style="color:var(--gold-core);"></i><span>(+254) 718 292 217</span></div><div class="contact-item"><i class="fas fa-phone-alt" style="color:var(--gold-core);"></i><span>(+254) 702 115328</span></div><div class="contact-item"><i class="fas fa-phone-alt" style="color:var(--gold-core);"></i><span>(+254) 704 956073</span></div><div class="contact-item"><i class="fas fa-envelope" style="color:var(--gold-core);"></i><a href="mailto:goldenshine076@gmail.com" style="color:white;">goldenshine076@gmail.com</a></div><div class="contact-item"><i class="fas fa-map-marker-alt" style="color:var(--gold-core);"></i><span>Nairobi, Kenya</span></div></div><div class="footer-section"><h3>Navigate</h3><p><a href="#home" style="color:white;">Home</a></p><p><a href="#services" style="color:white;">Services</a></p><p><a href="#contact" style="color:white;">Contact</a></p></div></div><div class="footer-bottom"><p>© 2025 GoldenShine Cleaning & Organising Services Ltd — Radiance Beyond Standards</p></div></footer>
     <button class="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
 
     <script>
@@ -845,7 +838,7 @@
                 if(fallback) fallback.style.display = 'block';
             }
 
-            // ========== DROPDOWN AREAS LOGIC (Nairobi + Nearby Counties) ==========
+            // DROPDOWN AREAS
             const areasData = [
                 { parent: "Nairobi 🌆", icon: "fa-city", children: ["Westlands", "Lavington", "Kilimani", "Kileleshwa", "Karen", "Hardy", "Runda", "Gigiri", "Lang'ata", "South B", "South C", "Eastlands", "Embakasi", "Buruburu", "Donholm", "Parklands", "Highridge", "Madaraka Estate"] },
                 { parent: "Kiambu County 🌳", icon: "fa-tree", children: ["Thika", "Ruiru", "Kiambu Town", "Kikuyu", "Limuru", "Juja", "Githunguri", "Karuri", "Ndumberi", "Tigoni"] },
@@ -853,19 +846,15 @@
                 { parent: "Kajiado County 🦒", icon: "fa-tree", children: ["Ngong", "Kiserian", "Ongata Rongai", "Kitengela", "Isinya", "Namanga", "Bissil", "Loitokitok"] },
                 { parent: "Murang'a County 🍃", icon: "fa-leaf", children: ["Murang'a Town", "Kangari", "Kenol", "Makuyu", "Maragua", "Kandara", "Gatanga", "Ithanga"] }
             ];
-
             const container = document.getElementById('areasDropdownContainer');
             if(container) {
                 areasData.forEach(loc => {
                     const dropdownItem = document.createElement('div');
                     dropdownItem.className = 'area-dropdown-item';
-                    
                     const parentDiv = document.createElement('div');
                     parentDiv.className = 'dropdown-parent';
                     parentDiv.setAttribute('role', 'button');
-                    parentDiv.setAttribute('tabindex', '0');
                     parentDiv.innerHTML = `<h3><i class="fas ${loc.icon}"></i> ${loc.parent}</h3><i class="fas fa-chevron-down arrow-icon"></i>`;
-                    
                     const childrenDiv = document.createElement('div');
                     childrenDiv.className = 'dropdown-children';
                     const childrenGrid = document.createElement('div');
@@ -879,7 +868,6 @@
                     childrenDiv.appendChild(childrenGrid);
                     dropdownItem.appendChild(parentDiv);
                     dropdownItem.appendChild(childrenDiv);
-                    
                     const arrowIcon = parentDiv.querySelector('.arrow-icon');
                     parentDiv.addEventListener('click', (e) => {
                         e.stopPropagation();
